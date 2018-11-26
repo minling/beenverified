@@ -13,9 +13,9 @@ Please set up your environment with these requirements:
 
 * Redis
 
-##Instructions
+## Instructions
 
-#####Please follow this set of instructions to use the app
+#### Please follow this set of instructions to use the app
 * Git clone the repository onto your local machine
 
 ```
@@ -76,7 +76,6 @@ rails server
   ```
 * Feel free to check out the Commands section to see other things you can do with this app
 
-=======
 ## Algorithm
 The shortest link possible for any url, has a size of 1 character. The available characters for use is:
 
@@ -124,10 +123,10 @@ def encode_url
     update(short_url: string)
 end
 ```
-=======
+
 ## Commands
 
-###To create a shortened link:
+### To create a shortened link:
 
 `curl -X POST -d "https://google.com" http://localhost:3000/url.json`
 
@@ -143,7 +142,7 @@ If it's already taken, it will return an error:
  {"errors":{"url":["has already been taken"]}}
 ```
  
-###To access the link you just created:
+### To access the link you just created:
  
 `curl  http://localhost:3000/c`
 
@@ -153,7 +152,7 @@ This will return the link to be redirected to.
 {"rediect":"https://google.com"}
 ```
 
-###To get the top 100 links:
+### To get the top 100 links:
 `curl  http://localhost:3000/top.json`
 
 Sample json results:
@@ -165,7 +164,7 @@ Sample json results:
   {"url":"https://google.com","short_url":"b","title":null,"access_count":1}
 ]...}
 ```
-###Running a Resque worker to grab the `<title>`
+### Running a Resque worker to grab the `<title>`
 
 ```
 bundle exec rake environment resque:work QUEUE=title
