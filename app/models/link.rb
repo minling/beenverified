@@ -1,6 +1,6 @@
 class Link < ApplicationRecord
 
-  validates :url, presence: {message: 'Please enter a url'}, uniqueness: true, on: :create
+  validates :url, presence: true, uniqueness: true, on: :create
   after_create :encode_url
 
   CHARS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~'
