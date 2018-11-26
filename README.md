@@ -11,13 +11,70 @@ Please set up your environment with these requirements:
 
 * Rails 5.2.1
 
-* Run these to set up the database and seeds
+* Redis
+
+##Instructions
+
+#####Please follow this set of instructions to use the app
+* Git clone the repository onto your local machine
+
+```
+git clone git@github.com:minling/beenverified.git
+```
+* If you do not have ruby 2.5.3 or rails 5.2.1, run these:
+
+```
+rvm install 2.5.3
+gem install rails
+``` 
+* To set up the database and seeds
 
 ```
 rake db:create
 rake db:migrate
-rake db:seed
+rake db:seed # optional, if you prefer to not have any
 ```
+* Running RSpec tests
+
+```
+bundle
+bundle exec rspec spec
+```
+* Download and start Redis Server
+
+```
+brew install redis
+redis-server
+```
+
+* Start Rails server
+
+```
+rails server
+```
+* To test that Redis is pulling the `<title>` from the website:
+
+  1) Create a new shortened url (you can replace *https://loft.com* with your own link)
+
+  `curl -X POST -d "https://loft.com" http://localhost:3000/url.json`
+  
+  2) Do rails console to check that there is no title on the link you just created
+
+  ```
+  rails console
+  Link.last
+  ```
+  3) Run the resque worker and wait a few minutes
+  `bundle exec rake environment resque:work QUEUE=title`
+  Type in `command` + `z` together to quit the job.
+
+  4) Open up a new terminal tab and look at the record again. It should be populated with the `<title>`
+
+  ```
+  rails console
+  Link.last
+  ```
+* Feel free to check out the Commands section to see other things you can do with this app
 
 =======
 ## Algorithm
@@ -43,7 +100,7 @@ The first record would have a short_url of 1 character, `http://localhost:3000/b
 
 After the first 65 records are saved, on the 66th url, it would contain short url length of 2. 
 
-```
+```ruby
 <Link id: 66, url: "https://Miibeian.gov.cn", 
 short_url: "ab", 
 title: nil, 
@@ -69,7 +126,6 @@ end
 ```
 =======
 ## Commands
-There are 3 endpoints you can use:
 
 ###To create a shortened link:
 
@@ -108,4 +164,9 @@ Sample json results:
   {"url":"https://etsy.com","short_url":"c","title":null,"access_count":2},
   {"url":"https://google.com","short_url":"b","title":null,"access_count":1}
 ]...}
+```
+###Running a Resque worker to grab the `<title>`
+
+```
+bundle exec rake environment resque:work QUEUE=title
 ```
