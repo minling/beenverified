@@ -10,7 +10,7 @@ class Link < ApplicationRecord
     number = id
     string = ''
     while number > 0
-      string = CHARS[number % SIZE] + string
+      string += CHARS[number % SIZE]
       number = (number / SIZE).floor
     end
     update(short_url: string)
