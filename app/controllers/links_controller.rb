@@ -13,6 +13,7 @@ class LinksController < ApplicationController
     url = request.body.read
     link = Link.new(url: url)
     if link.save
+      Resque.enqueue(Title, url, link.id)
       render json: {short_url: link.short_url}
     else
       render json: {errors: link.errors.messages}
