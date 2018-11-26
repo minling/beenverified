@@ -1,8 +1,11 @@
 class LinksController < ApplicationController
 
   def index
-    link = Link.where(short_url: params['path'])
-    render json: {rediect: link.first.url} and return unless link.empty?
+    link = Link.where(short_url: params['path']).first
+    unless link.blank?
+      link.increment_access_count
+      render json: {redirect: link.url} and return
+    end
     render json: {error: 'This short url is not valid'}
   end
 
@@ -15,5 +18,12 @@ class LinksController < ApplicationController
       render json: {errors: link.errors.messages}
     end
   end
+
+  def top
+    links = Link.order(access_count: :desc).limit(100)
+    top_links = links.map {|link| {url: link.url, short_url: link.short_url, title: link.title, access_count: link.access_count}}
+    render json: {top_100: top_links}
+  end
+
 
 end

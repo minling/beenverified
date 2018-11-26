@@ -4,7 +4,7 @@ class CreateLinks < ActiveRecord::Migration[5.2]
       t.string :url
       t.string :short_url
       t.string :title
-      t.integer :access_count
+      t.integer :access_count, default: 0
       t.timestamps
     end
   end

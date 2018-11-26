@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2018_11_25_033701) do
     t.string "url"
     t.string "short_url"
     t.string "title"
-    t.integer "access_count"
+    t.integer "access_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
