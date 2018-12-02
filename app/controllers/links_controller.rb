@@ -1,6 +1,6 @@
 class LinksController < ApplicationController
 
-  def index
+  def show
     link = Link.where(short_url: params['path']).first
     unless link.blank?
       link.increment_access_count
@@ -20,7 +20,7 @@ class LinksController < ApplicationController
     end
   end
 
-  def top
+  def index
     links = Link.order(access_count: :desc).limit(100)
     top_links = links.map {|link| {url: link.url, short_url: link.short_url, title: link.title, access_count: link.access_count}}
     render json: {top_100: top_links}
