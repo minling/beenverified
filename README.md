@@ -149,7 +149,7 @@ If it's already taken, it will return an error:
 This will return the link to be redirected to.
 
 ```
-{"rediect":"https://google.com"}
+{"redirect":"https://google.com"}
 ```
 
 ### To get the top 100 links:
