@@ -30,6 +30,7 @@ class LinksController < ApplicationController
 protected
   def set_response_header
     headers['Access-Control-Allow-Origin'] = '*'
+    headers['Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS']
   end
 
   
