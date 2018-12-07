@@ -1,9 +1,8 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  YourAppNameHere::Application.configure do
+  UrlShortener::Application.configure do
     ENV["REDISTOGO_URL"] = 'redis://redistogo:10dadb59d95657581f767ce7e463a25a@barb.redistogo.com:9934/'
-  
-    #other stuff below
+    ENV["REDIS_URL"] = 'redis://h:p5b10a0356d96e995702db8afded11a15450df9b62875d4b723ad6b58bb511297@ec2-54-161-0-167.compute-1.amazonaws.com:54619'
   end
   # Code is not reloaded between requests.
   config.cache_classes = true
