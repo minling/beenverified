@@ -3,6 +3,15 @@
 ## Description
 This application captures full urls and creates urls of the shortest possible length.
 
+* Here is the link to the deployed React Application:
+https://beenverified-client.herokuapp.com/
+
+* Here is the link to the React github
+https://github.com/minling/beenverified-client
+
+* Here is the link to the deployed API:
+https://beenverified-api.herokuapp.com/
+
 ## Setup
 
 Please set up your environment with these requirements:
